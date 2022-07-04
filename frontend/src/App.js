@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AddReview from './components/add-review';
-import Restaurants from './components/restaurants';
+import Restaurant from './components/restaurants';
 import RestaurantsList from './components/restaurants-list';
 import Login from './components/login';
 
@@ -29,7 +29,7 @@ const App = () => {
                     </li>
                     <li className="nav-item">
                         { user ? (
-                            <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
+                            <a href="/" onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
                                 Logout {user.name}
                             </a>
                         ) : (            

@@ -15,7 +15,7 @@ MongoClient.connect(
         useNewUrlParser:true
     }
 ).catch(err => {
-    console.error(error.stack);
+    console.error(err.stack);
     process.exit(1);
 }).then(async client => {
     await RestaurantsDAO.injectDB(client);
