@@ -23,8 +23,7 @@ const Login = props => {
       <div>
         <div className="form-group">
           <label htmlFor="user">Username</label>
-            <input type="text" className="form-control" id="name" required value={user.name}
-              onChange={handleInputChange} name="name" />
+            <input type="text" className="form-control" id="name" required value={user.name} onChange={handleInputChange} name="name" />
         </div>
         <div className="form-group">
           <label htmlFor="id">ID</label>

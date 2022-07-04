@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RestaurantDataService from '../services/restaurant.js';
+import RestaurantDataService from '../restaurant.js';
 import { Link } from 'react-router-dom';
 
 const Restaurants = props => {
