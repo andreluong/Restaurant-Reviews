@@ -70,21 +70,31 @@ const RestaurantsList = props => {
   return (
     <div>
       <div className="row pb-1">
-        <div className="input-group col-lg-4">
-          <input type="text" className="form-control" placeholder="Search by name"
-            value={searchName} onChange={onChangeSearchName} />
+        <div className="input-group col-lg-4 pb-1">
+          <input 
+            type="text"
+            className="form-control" 
+            placeholder="Search by name"
+            value={searchName}
+            onChange={onChangeSearchName} 
+          />
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="button" onClick={findByName}>Search</button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
-          <input type="text" className="form-control" placeholder="Search by zip"
-            value={searchZip} onChange={onChangeSearchZip} />
+        <div className="input-group col-lg-4 pb-1">
+          <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Search by zip" 
+            value={searchZip} 
+            onChange={onChangeSearchZip} 
+          />
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="button" onClick={findByZip}>Search</button>
           </div>
         </div>
-        <div className="input-group col-lg-4">
+        <div className="input-group col-lg-4 pb-1">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
                return ( <option value={cuisine}> {cuisine.substr(0, 20)} </option> );
@@ -100,17 +110,30 @@ const RestaurantsList = props => {
         {restaurants.map((restaurant) => {
           const address = `${restaurant.address.building} ${restaurant.address.street}, ${restaurant.address.zipcode}`;
           return (
-            <div className="col-lg-4 pb-1">
+            <div className="col-lg-4 pb-2">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">{restaurant.name}</h5>
                   <p className="card-text">
                     <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
-                    <strong>Address: </strong>{address}
+                    <strong>Address: </strong>{address}<br/>
+                    <strong>Stars: </strong>
                   </p>
-                  <div className="row">
-                    <Link to={"/restaurants/"+restaurant._id} className="btn btn-primary col-lg-5 mx-1 mb-1">View Reviews</Link>
-                    <a target="_blank" rel="noreferrer" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1">View Map</a>
+                  <div className="row mb-4">
+                    <div className="google-map-code">
+                      <iframe 
+                        width="100%"
+                        height="300px" 
+                        style={{border:0}} 
+                        loading="lazy"
+                        aria-hidden="false" 
+                        tabindex="0" 
+                        src={"https://www.google.com/maps/embed/v1/place?key=AIzaSyB8Z4tc9gneCgNyHY3gS4TaHi_fbM0kRSE&q=" + restaurant.name + "," + address}
+                      />
+                    </div>
+                  </div>
+                  <div className="row ps-2">
+                    <Link to={"/restaurants/" + restaurant._id} className="btn btn-primary col-lg-5 ms-1 mb-1">View Reviews</Link>
                   </div>
                 </div>
               </div>

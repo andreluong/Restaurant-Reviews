@@ -5,6 +5,7 @@ export default class ReviewsController {
         try {
             const restaurantId = req.body.restaurant_id;
             const review = req.body.text;
+            const rating = req.body.rating;
             const userInfo = {
                 name: req.body.name,
                 _id: req.body.user_id
@@ -14,6 +15,7 @@ export default class ReviewsController {
                 restaurantId,
                 userInfo,
                 review,
+                rating,
                 date
             );
 
@@ -27,11 +29,13 @@ export default class ReviewsController {
         try {
             const reviewId = req.body.review_id;
             const text = req.body.text;
+            const rating = req.body.rating;
             const date = new Date();
             const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
                 req.body.user_id,
                 text,
+                rating,
                 date
             );
 

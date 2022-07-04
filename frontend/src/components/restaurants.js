@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RestaurantDataService from '../restaurant.js';
+import RestaurantDataService from '../services/restaurant.js';
 import { Link } from 'react-router-dom';
 
 const Restaurants = props => {
@@ -40,13 +40,13 @@ const Restaurants = props => {
     <div>
       {restaurant ? (
         <div>
-          <h5>{restaurant.name}</h5>
+          <h2>{restaurant.name}</h2>
           <p>
             <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
             <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}
           </p>
           <Link to={"/restaurants/" + props.match.params.id + "/review"} className="btn btn-primary">Add Review</Link>
-          <h4>Reviews</h4>
+          <h4 className="mt-3">Reviews</h4>
           <div className="row">
             {restaurant.reviews.length > 0 ? (
               restaurant.reviews.map((review, index) => {
@@ -55,13 +55,14 @@ const Restaurants = props => {
                     <div className="card">
                       <div className="card-body">
                         <p className="card-text">
-                          {review.text}<br/>
                           <strong>User: </strong>{review.name}<br/>
-                          <strong>Date: </strong>{review.date}
+                          <strong>Date: </strong>{review.date}<br/>
+                          <strong>Rating: </strong>{review.ratng}<br/>
+                          {review.text} 
                         </p>
                         {props.user && props.user.id === review.user_id &&
-                          <div className="row">
-                            <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+                          <div className="row mt-4 ps-2">
+                            <button onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</button>
                             <Link to={{
                               pathname: "/restaurants/" + props.match.params.id + "/review",
                               state: { currentReview: review }

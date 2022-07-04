@@ -11,16 +11,16 @@ export default class ReviewsDAO {
         } catch(e) {
             console.error(`Unable to establish collection handles in userDAO: ${e}`);
         }
-
     }
 
-    static async addReview(restaurantId, user, review, date) {
+    static async addReview(restaurantId, user, review, rating, date) {
         try {
             const reviewDoc = {
                 name: user.name,
                 user_id: user._id,
                 date: date,
                 text: review,
+                rating: rating,
                 restaurant_id: ObjectId(restaurantId)
             };
 
@@ -31,13 +31,13 @@ export default class ReviewsDAO {
         }
     }
 
-    static async updateReview(reviewId, userId, text, date) {
+    static async updateReview(reviewId, userId, text, rating, date) {
         try {
             const updateResponse = await reviews.updateOne(
                 { user_id: userId, _id: ObjectId(reviewId) },
-                { $set: { text: text, date: date } }
+                { $set: { text: text, rating: rating, date: date } }
             );
-
+            
             return updateResponse;
         } catch(e) {
             console.error(`Unable to post review: ${e}`);

@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
-import RestaurantDataService from '../restaurant.js';
+import RestaurantDataService from '../services/restaurant.js';
 import { Link } from 'react-router-dom';
 
 const AddReview = props => {
   let initialReviewState = "";
+  let initialRatingState = "";
   let editing = false;
 
   if (props.location.state && props.location.state.currentReview) {
     editing = true;
     initialReviewState = props.location.state.currentReview.text;
+    initialRatingState = props.location.state.currentReview.rating;
   }
 
   const [review, setReview] = useState(initialReviewState);
+  const [rating, setRating] = useState(initialRatingState);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = event => {
+  const handleReviewChange = event => {
     setReview(event.target.value);
+  };
+
+  const handleRatingChange = event => {
+    setRating(event.target.value);
   };
 
   const saveReview = () => {
     var data = {
       text: review,
+      rating: rating,
       name: props.user.name,
       user_id: props.user.id,
       restaurant_id: props.match.params.id
@@ -56,9 +64,30 @@ const AddReview = props => {
           ) : (
             <div>
               <div className="form-group">
-                <label htmlFor="description">{ editing ? "Edit" : "Create" } Review</label>
-                <input type="text" className="form-control" id="text" required value={review}
-                  onChange={handleInputChange} name="text" />
+                <label htmlFor="description">{ editing ? "Edit " : "Create " }Review</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  id="text" 
+                  required 
+                  value={review}
+                  onChange={handleReviewChange} 
+                  name="text" 
+                />
+              </div>
+              <div>
+                <label htmlFor="rating">{ editing ? "Edit " : "Create " }Rating</label>
+                  <input 
+                    type="number"
+                    className="form-control" 
+                    id="rating"
+                    min="1"
+                    max="5"
+                    required
+                    value={rating}
+                    onChange={handleRatingChange}     
+                    name="rating"
+                  />
               </div>
               <button onClick={saveReview} className="btn btn-success">Submit</button>
             </div>
