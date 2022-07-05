@@ -54,4 +54,14 @@ export default class RestaurantsController {
             res.status(500).json({ error: e });
         }
     }
+
+    static async apiGetMapsKey(req, res, next) {
+        try {
+            let key = await RestaurantsDAO.getMapsApiKey();
+            res.json(key);
+        } catch(e) {
+            console.log(`api, ${e}`);
+            res.status(500).json({ error: e });
+        }
+    }
 }

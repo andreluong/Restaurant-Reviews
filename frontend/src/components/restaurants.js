@@ -43,7 +43,7 @@ const Restaurants = props => {
           <h2>{restaurant.name}</h2>
           <p>
             <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
-            <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}
+            <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}<br />
           </p>
           <Link to={"/restaurants/" + props.match.params.id + "/review"} className="btn btn-primary">Add Review</Link>
           <h4 className="mt-3">Reviews</h4>
@@ -57,7 +57,7 @@ const Restaurants = props => {
                         <p className="card-text">
                           <strong>User: </strong>{review.name}<br/>
                           <strong>Date: </strong>{review.date}<br/>
-                          <strong>Rating: </strong>{review.ratng}<br/>
+                          <strong>Rating: </strong>{review.rating}<br/>
                           {review.text} 
                         </p>
                         {props.user && props.user.id === review.user_id &&

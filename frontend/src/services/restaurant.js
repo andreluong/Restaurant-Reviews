@@ -25,8 +25,12 @@ class RestaurantDataService {
         return http.delete(`/review?id=${id}`, {data: {user_id: userId}});
     }
 
-    getCuisines(id) {
+    getCuisines() {
         return http.get("/cuisines");
+    }
+
+    getMapsKey() {
+        return http.get("/maps/key");
     }
 }
 

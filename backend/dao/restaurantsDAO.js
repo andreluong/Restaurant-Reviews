@@ -1,5 +1,6 @@
-import mongodb from "mongodb";
+import mongodb from 'mongodb';
 const ObjectId = mongodb.ObjectID;
+
 let restaurants;
 
 export default class RestaurantsDAO {
@@ -100,5 +101,9 @@ export default class RestaurantsDAO {
           console.error(`Unable to get cuisines, ${e}`);
         }
         return cuisines;
+    }
+
+    static async getMapsApiKey() {
+        return process.env.REACT_APP_MAPS_API_KEY;
     }
 }

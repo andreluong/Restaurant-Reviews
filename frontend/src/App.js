@@ -26,7 +26,7 @@ const App = () => {
                 <a href="/restaurants" className="navbar-brand p-3">
                     <FontAwesomeIcon icon={faAward} className="pe-1" />Restaurant Reviews
                 </a>
-                <div className="navbar-nav mr-auto">
+                <div className="navbar-nav">
                     <li className="nav-item">
                         <Link to={"/restaurants"} className="nav-link">Restaurants</Link>
                     </li>
@@ -40,7 +40,7 @@ const App = () => {
                 </div>
             </nav>
             
-            <div className="container mt-3">
+            <div className="container mt-3 min-vh-100">
                 <Switch>
                     <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
                     <Route path="/restaurants/:id/review" render={(props) => (

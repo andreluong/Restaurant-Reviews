@@ -23,7 +23,6 @@ export default class ReviewsDAO {
                 rating: rating,
                 restaurant_id: ObjectId(restaurantId)
             };
-
             return await reviews.insertOne(reviewDoc);
         } catch(e) {
             console.error(`Unable to post review: ${e}`);
@@ -37,7 +36,6 @@ export default class ReviewsDAO {
                 { user_id: userId, _id: ObjectId(reviewId) },
                 { $set: { text: text, rating: rating, date: date } }
             );
-            
             return updateResponse;
         } catch(e) {
             console.error(`Unable to post review: ${e}`);
@@ -51,7 +49,6 @@ export default class ReviewsDAO {
                 _id: ObjectId(reviewId),
                 user_id: userId
             });
-
             return deleteResponse;
         } catch(e) {
             console.error(`Unable to post review: ${e}`);

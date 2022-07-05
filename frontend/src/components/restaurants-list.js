@@ -8,10 +8,12 @@ const RestaurantsList = props => {
   const [searchZip, setSearchZip] = useState("");
   const [searchCuisine, setSearchCuisine] = useState("");
   const [cuisines, setCuisines] = useState(["All Cuisines"]);
-
+  const [mapsApiKey, setMapsApiKey] = useState("");
+  
   useEffect(() => {
     retrieveRestaurants();
     retrieveCuisines();
+    retrieveKey()
   }, []);
 
   const onChangeSearchName = e => {
@@ -47,6 +49,15 @@ const RestaurantsList = props => {
       .catch(e => { console.log(e); });
   };
 
+  const retrieveKey = () => {
+    RestaurantDataService.getMapsKey()
+      .then(response => {
+        console.log(response.data);
+        setMapsApiKey(response.data);
+      })
+      .catch(e => { console.log(e); });
+  }
+
   const refreshList = () => { retrieveRestaurants(); };
 
   const find = (query, by) => {
@@ -69,7 +80,7 @@ const RestaurantsList = props => {
 
   return (
     <div>
-      <div className="row pb-1">
+      <div className="row pb-2">
         <div className="input-group col-lg-4 pb-1">
           <input 
             type="text"
@@ -82,6 +93,7 @@ const RestaurantsList = props => {
             <button className="btn btn-outline-secondary" type="button" onClick={findByName}>Search</button>
           </div>
         </div>
+
         <div className="input-group col-lg-4 pb-1">
           <input 
             type="text" 
@@ -94,6 +106,7 @@ const RestaurantsList = props => {
             <button className="btn btn-outline-secondary" type="button" onClick={findByZip}>Search</button>
           </div>
         </div>
+        
         <div className="input-group col-lg-4 pb-1">
           <select onChange={onChangeSearchCuisine}>
              {cuisines.map(cuisine => {
@@ -117,18 +130,18 @@ const RestaurantsList = props => {
                   <p className="card-text">
                     <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
                     <strong>Address: </strong>{address}<br/>
-                    <strong>Stars: </strong>
                   </p>
                   <div className="row mb-4">
                     <div className="google-map-code">
-                      <iframe 
+                      <iframe
+                        title="map" 
                         width="100%"
                         height="300px" 
                         style={{border:0}} 
                         loading="lazy"
                         aria-hidden="false" 
-                        tabindex="0" 
-                        src={"https://www.google.com/maps/embed/v1/place?key=AIzaSyB8Z4tc9gneCgNyHY3gS4TaHi_fbM0kRSE&q=" + restaurant.name + "," + address}
+                        tabindex="0"  
+                        src={"https://www.google.com/maps/embed/v1/place?key=" + mapsApiKey + "&q=" + encodeURIComponent(restaurant.name) + "," + address}
                       />
                     </div>
                   </div>

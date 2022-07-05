@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = props => {
   const initialUserState = {
@@ -19,20 +20,35 @@ const Login = props => {
   }
 
   return (
-    <div className="submit-form">
+    <form className="submit-form" onSubmit={login}>
       <div>
         <div className="form-group">
           <label htmlFor="user">Username</label>
-            <input type="text" className="form-control" id="name" required value={user.name} onChange={handleInputChange} name="name" />
+            <input 
+              type="text" 
+              className="form-control" 
+              id="name" 
+              required 
+              value={user.name} 
+              onChange={handleInputChange} 
+              name="name" 
+            />
         </div>
         <div className="form-group">
           <label htmlFor="id">ID</label>
-          <input type="text" className="form-control" id="id" required value={user.id}
-            onChange={handleInputChange} name="id" />
+          <input
+            type="text" 
+            className="form-control" 
+            id="id" 
+            required 
+            value={user.id} 
+            onChange={handleInputChange}
+            name="id" 
+          />
         </div>
-        <button onClick={login} className="btn btn-success">Login</button>
+        <button className="btn btn-success mt-3">Login</button>
       </div>
-    </div>
+    </form>
   );
 };
 

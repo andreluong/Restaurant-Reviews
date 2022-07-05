@@ -7,9 +7,8 @@ const router = express.Router();
 router.route('/').get(RestaurantsCtrl.apiGetRestaurants);
 router.route('/id/:id').get(RestaurantsCtrl.apiGetRestaurantById);
 router.route('/cuisines').get(RestaurantsCtrl.apiGetRestaurantCuisines);
-
-router
-    .route('/review')
+router.route('/maps/key').get(RestaurantsCtrl.apiGetMapsKey);
+router.route('/review')
     .post(ReviewsCtrl.apiPostReview)
     .put(ReviewsCtrl.apiUpdateReview)
     .delete(ReviewsCtrl.apiDeleteReview);
